@@ -5,10 +5,10 @@ namespace Entities.Concrete
 {
     public class Person : AuditableEntity
     {
-        public Person()
-        {
-            Province = null;
-        }
+        private Province province;
+        private District district;
+        private Neighbourhood neighbourhood;
+
         public long MERNISNO { get; set; }
         public string NAME { get; set; }
         public string SURNAME { get; set; }
@@ -17,8 +17,8 @@ namespace Entities.Concrete
         public string EMAIL { get; set; }
         public string ADDRESS { get; set; }
 
-        public Province? Province { get; set; }
-        public District? District { get; set; }
-        public Neighbourhood? Neighbourhood { get; set; }
+        public Province? Province { get => province; set => province = value; }
+        public District? District { get => district; set => district = value; }
+        public Neighbourhood? Neighbourhood { get => neighbourhood; set => neighbourhood = value; }
     }
 }
