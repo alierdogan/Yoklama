@@ -5,6 +5,10 @@ namespace Entities.Concrete
 {
     public class Person : AuditableEntity
     {
+        public Person()
+        {
+            Province = null;
+        }
         public long MERNISNO { get; set; }
         public string NAME { get; set; }
         public string SURNAME { get; set; }

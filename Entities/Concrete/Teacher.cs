@@ -5,10 +5,16 @@ namespace Entities.Concrete
 {
     public class Teacher : AuditableEntity
     {
-        public Person? Person { get; set; }
-        public Department? Department { get; set; }
-        public Branch? Branch { get; set; }
-        public Classroom? Classroom { get; set; }
-        public ICollection<School>? Schools { get; set; }
+        private Person person;
+        private Department department;
+        private Branch branch;
+        private Classroom classroom;
+        private ICollection<School> schools;
+
+        public Person? Person { get => person; set => person = value; }
+        public Department? Department { get => department; set => department = value; }
+        public Branch? Branch { get => branch; set => branch = value; }
+        public Classroom? Classroom { get => classroom; set => classroom = value; }
+        public ICollection<School>? Schools { get => schools; set => schools = value; }
     }
 }

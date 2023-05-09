@@ -31,7 +31,9 @@ namespace DataAccess.Concrete.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<School>().ToTable("School");
+            modelBuilder.Entity<Teacher>().ToTable("Teacher");
         }
 
         public virtual DbSet<Person> Persons { get; set; }

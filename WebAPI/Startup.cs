@@ -37,6 +37,7 @@ namespace WebAPI
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<ITeacherDal, EfTeacherDal>();
             services.AddTransient<ITeacherService, TeacherService>();
+            //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
@@ -54,6 +55,7 @@ namespace WebAPI
             }
 
             //app.UseHttpsRedirection();
+
 
             app.UseRouting(); 
 
