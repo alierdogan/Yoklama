@@ -23,10 +23,17 @@ namespace WebAPI.Controllers
         [Route("[action]")]
         public async Task<ActionResult> GetList()
         {
-            var result = await _service.GetListAsync();
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            try
+            {
+                var result = await _service.GetListAsync();
+                if (result != null)
+                    return Ok(new Result(true, "", result));
+                return BadRequest(new Result(false, "Kayıt bulunamadı", result));
+            }  
+            catch (Exception ex)
+            {
+                return BadRequest(new Result(false, ex.Message, null));
+            }
         }
 
         [HttpGet]
@@ -35,8 +42,8 @@ namespace WebAPI.Controllers
         {
             var result = await _service.GetByIdAsync(id);
             if (result != null)
-                return Ok(result);
-            return BadRequest();
+                return Ok(new Result(true, "", result));
+            return BadRequest(new Result(false, "Kayıt bulunamadı", result));
         }
 
         [HttpDelete]

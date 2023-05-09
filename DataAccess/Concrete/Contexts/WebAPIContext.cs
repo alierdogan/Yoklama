@@ -11,16 +11,22 @@ namespace DataAccess.Concrete.Contexts
         {
             
         }
+
         public WebAPIContext()
         {
-
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string conString = @"Data Source=127.0.0.1,1401; User ID=sa; Password=Aa123456; Initial Catalog=Yoklama; Trusted_Connection=True; TrustServerCertificate=True; Persist Security Info=True; Integrated Security=False;";
-            optionsBuilder.UseSqlServer(conString);
-            //optionsBuilder.UseSqlServer(new ConfigurationBuilder().Build().GetConnectionString("YoklamaDb"));
+            //string conString = @"Data Source=127.0.0.1,1401; User ID=sa; Password=Aa123456; Initial Catalog=Yoklama; Trusted_Connection=True; TrustServerCertificate=True; Persist Security Info=True; Integrated Security=False;";
+            //optionsBuilder.UseSqlServer(conString);
+            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("YoklamaDb"));
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("YoklamaDb"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
