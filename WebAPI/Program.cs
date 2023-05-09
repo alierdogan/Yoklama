@@ -1,17 +1,9 @@
+using DataAccess.Concrete.Contexts;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using DataAccess.Concrete.Contexts;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WebAPI
 {
@@ -26,19 +18,17 @@ namespace WebAPI
 
         private static void CreateDbIfNotExists(IHost host)
         {
-            using (var scope = host.Services.CreateScope())
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            try
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<WebAPIContext>();
-                    DbInitializer.Initialize(context);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger>();
-                    logger.LogError(ex,"Veritabaný oluþturulamadý");
-                }
+                var context = services.GetRequiredService<WebAPIContext>();
+                DbInitializer.Initilize(context);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger>();
+                logger.LogError(ex, "Veritabaný oluþturulamadý");
             }
         }
 

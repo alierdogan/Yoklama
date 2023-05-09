@@ -7,8 +7,5 @@ namespace Entities.Concrete
     {
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
-
-        public School School { get; set; }
-        public ICollection<Branch> Branches { get; set; }
     }
 }

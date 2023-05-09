@@ -7,8 +7,5 @@ namespace Entities.Concrete
     {
         public int CODE { get; set; }
         public string NAME { get; set; }
-
-        public Region Region { get; set; }
-        public ICollection<District> Districts { get; set; }
     }
 }

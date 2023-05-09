@@ -6,7 +6,5 @@ namespace Entities.Concrete
     {
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
-
-        public Person Person { get; set; }
     }
 }

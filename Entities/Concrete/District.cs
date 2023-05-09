@@ -8,8 +8,5 @@ namespace Entities.Concrete
         public int CODE { get; set; }
         public string NAME { get; set; }
         public int PROVINCEREF { get; set; }
-
-        public Province Province { get; set; }
-        public ICollection<Neighbourhood> Neighbourhoods { get; set; }
     }
 }
