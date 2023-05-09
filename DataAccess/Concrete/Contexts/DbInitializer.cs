@@ -17,10 +17,28 @@ namespace DataAccess.Concrete.Contexts
                 return;
             }
 
+            var persons = new Person[] {
+                new Person(){ STATUS=1,CREATEDBY=1,CREATIONDATE=DateTime.Now,ADDRESS="test",EMAIL="test",GENDER=Entities.Enums.Gender.Male,MERNISNO=12345678902,MOBILEPHONE=1234567895,NAME="test",SURNAME="user" },
+                new Person(){ STATUS=1,CREATEDBY=1,CREATIONDATE=DateTime.Now,ADDRESS="test",EMAIL="test",GENDER=Entities.Enums.Gender.Male,MERNISNO=12345678902,MOBILEPHONE=1234567895,NAME="test",SURNAME="teacher" },
+                new Person(){ STATUS=1,CREATEDBY=1,CREATIONDATE=DateTime.Now,ADDRESS="test",EMAIL="test",GENDER=Entities.Enums.Gender.Male,MERNISNO=12345678902,MOBILEPHONE=1234567895,NAME="test",SURNAME="student" }
+            };
+            context.Persons.AddRange(persons);
+
             var users = new User[] {
-                new User(){ STATUS=1,USERNAME="ali",PASSWORD="123",CREATEDBY=1,CREATIONDATE=DateTime.Now }
+                new User(){ STATUS=1,USERNAME="ali",PASSWORD="123",CREATEDBY=1,CREATIONDATE=DateTime.Now,PersonId=1 }
             };
             context.Users.AddRange(users);
+
+            var teachers = new Teacher[] {
+                new Teacher(){ STATUS=1,CREATEDBY=1,CREATIONDATE=DateTime.Now,PersonId=2 }
+            };
+            context.Teachers.AddRange(teachers);
+
+            var students = new Student[] {
+                new Student(){ STATUS=1,CREATEDBY=1,CREATIONDATE=DateTime.Now,PersonId=3 }
+            };
+            context.Students.AddRange(students);
+
             context.SaveChanges();
         }
     }

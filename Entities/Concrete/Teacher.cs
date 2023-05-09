@@ -5,6 +5,6 @@ namespace Entities.Concrete
 {
     public class Teacher : AuditableEntity
     {
-        
+        public int PersonId { get; set; }
     }
 }
