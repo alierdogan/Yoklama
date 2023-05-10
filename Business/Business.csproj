@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <Compile Remove="Concrete\Base\**" />
+    <EmbeddedResource Remove="Concrete\Base\**" />
+    <None Remove="Concrete\Base\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\Base\" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
 </Project>
