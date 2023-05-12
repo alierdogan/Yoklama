@@ -6,14 +6,13 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VersionsController : ControllerBase
+    public class VersionController : ControllerBase
     {
         [HttpGet()]
-        [Route("[action]")]
+        [Route("")]
         public ActionResult Get()
         {
-            string version = "1.0";
-                return Ok(version);
+            return Ok("Yoklama Api 1.0");
         }
     }
 }

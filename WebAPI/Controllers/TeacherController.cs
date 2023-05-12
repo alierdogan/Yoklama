@@ -11,72 +11,60 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeachersController : ControllerBase
+    public class TeacherController : ControllerBase
     {
         readonly ITeacherService _service;
-        public TeachersController(ITeacherService service)
+        public TeacherController(ITeacherService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Route("[action]")]
+        [Route("All")]
         public async Task<ActionResult> GetList()
         {
             var result = await _service.GetListAsync();
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
 
         [HttpGet]
-        [Route("[action]/{id:int}")]
-        public async Task<ActionResult> GetById(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult> Get(int id)
         {
             var result = await _service.GetByIdAsync(id);
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
 
         [HttpDelete]
-        [Route("[action]/{id:int}")]
+        [Route("Delete/{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id);
-            if (result)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
 
         [HttpPost]
-        [Route("[action]")]
+        [Route("Add")]
         public async Task<ActionResult> Add([FromBody] Teacher Teacher)
         {
             var result = await _service.AddAsync(Teacher);
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
 
         [HttpPost]
-        [Route("[action]")]
+        [Route("AddRange")]
         public async Task<ActionResult> AddRange([FromBody] List<Teacher> Teachers)
         {
             var result = await _service.AddRangeAsync(Teachers);
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
 
         [HttpPut]
-        [Route("[action]")]
+        [Route("Update")]
         public async Task<ActionResult> Update([FromBody] Teacher Teacher)
         {
             var result = await _service.UpdateAsync(Teacher);
-            if (result != null)
-                return Ok(result);
-            return BadRequest();
+            return Result.ApiResult(result);
         }
     }
 }
