@@ -31,12 +31,16 @@ namespace WebAPI
             //services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(@"Data Source=127.0.0.1,1401; User ID=sa; Password=Aa123456; Initial Catalog=Yoklama; Trusted_Connection=True; TrustServerCertificate=True; Persist Security Info=True; Integrated Security=false;", opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
             services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("YoklamaDb"), opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
             services.AddControllers();
-            services.AddTransient<IUserDal, EfUserDal>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IPersonDal, EfPersonDal>();
-            services.AddTransient<IPersonService, PersonService>();
-            services.AddTransient<ITeacherDal, EfTeacherDal>();
-            services.AddTransient<ITeacherService, TeacherService>();
+
+            services.AddTransient<IBaseDal<User>, EfBaseDal<User, WebAPIContext>>();
+            services.AddTransient<IBaseDal<Person>, EfBaseDal<Person, WebAPIContext>>();
+            services.AddTransient<IBaseDal<Teacher>, EfBaseDal<Teacher, WebAPIContext>>();
+            services.AddTransient<IBaseDal<Student>, EfBaseDal<Student, WebAPIContext>>();
+
+            services.AddTransient<IService<User>, Service<User>>();
+            services.AddTransient<IService<Person>, Service<Person>>();
+            services.AddTransient<IService<Teacher>, Service<Teacher>>();
+            services.AddTransient<IService<Student>, Service<Student>>();
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
@@ -57,7 +61,7 @@ namespace WebAPI
             //app.UseHttpsRedirection();
 
 
-            app.UseRouting(); 
+            app.UseRouting();
 
             app.UseAuthorization();
 

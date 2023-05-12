@@ -1,28 +1,28 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
-using Entities.Concrete;
+using Entities.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class UserService : IUserService
+    public class Service<TEntity> : IService<TEntity> where TEntity : class, IEntity, new()
     {
-        private readonly IUserDal _dal;
-
-        public UserService(IUserDal dal)
+        private readonly IBaseDal<TEntity> _dal;
+        public Service(IBaseDal<TEntity> dal)
         {
-            this._dal = dal;
+            _dal = dal;
         }
-
-        public async Task<User> AddAsync(User entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             return await _dal.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<User>> AddRangeAsync(IEnumerable<User> entities)
+        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             return await _dal.AddRangeAsync(entities);
         }
@@ -32,22 +32,22 @@ namespace Business.Concrete
             return await _dal.DeleteAsync(id);
         }
 
-        public async Task<User> GetAsync(Expression<Func<User, bool>> filter)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
             return await _dal.GetAsync(filter);
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dal.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<User>> GetListAsync(Expression<Func<User, bool>> filter = null)
+        public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             return await _dal.GetListAsync(filter);
         }
 
-        public async Task<User> UpdateAsync(User entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             return await _dal.UpdateAsync(entity);
         }

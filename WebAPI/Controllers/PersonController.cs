@@ -13,8 +13,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        readonly IPersonService _service;
-        public PersonController(IPersonService service)
+        readonly IService<Person> _service;
+        public PersonController(IService<Person> service)
         {
             _service = service;
         }
