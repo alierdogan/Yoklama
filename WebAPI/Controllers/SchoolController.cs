@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class SchoolController : ControllerBase
     {
-        readonly IService<Student> _service;
-        public StudentController(IService<Student> service)
+        readonly IService<School> _service;
+        public SchoolController(IService<School> service)
         {
             _service = service;
         }
@@ -42,25 +43,25 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<ActionResult> Add([FromBody] Student Student)
+        public async Task<ActionResult> Add([FromBody] School School)
         {
-            var result = await _service.AddAsync(Student);
+            var result = await _service.AddAsync(School);
             return Result.ApiResult(result);
         }
 
         [HttpPost]
         [Route("AddRange")]
-        public async Task<ActionResult> AddRange([FromBody] List<Student> Students)
+        public async Task<ActionResult> AddRange([FromBody] List<School> Schools)
         {
-            var result = await _service.AddRangeAsync(Students);
+            var result = await _service.AddRangeAsync(Schools);
             return Result.ApiResult(result);
         }
 
         [HttpPut]
         [Route("Update")]
-        public async Task<ActionResult> Update([FromBody] Student Student)
+        public async Task<ActionResult> Update([FromBody] School School)
         {
-            var result = await _service.UpdateAsync(Student);
+            var result = await _service.UpdateAsync(School);
             return Result.ApiResult(result);
         }
     }

@@ -36,11 +36,13 @@ namespace WebAPI
             services.AddTransient<IBaseDal<Person>, EfBaseDal<Person, WebAPIContext>>();
             services.AddTransient<IBaseDal<Teacher>, EfBaseDal<Teacher, WebAPIContext>>();
             services.AddTransient<IBaseDal<Student>, EfBaseDal<Student, WebAPIContext>>();
+            services.AddTransient<IBaseDal<School>, EfBaseDal<School, WebAPIContext>>();
 
             services.AddTransient<IService<User>, Service<User>>();
             services.AddTransient<IService<Person>, Service<Person>>();
             services.AddTransient<IService<Teacher>, Service<Teacher>>();
             services.AddTransient<IService<Student>, Service<Student>>();
+            services.AddTransient<IService<School>, Service<School>>();
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {

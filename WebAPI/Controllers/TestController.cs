@@ -21,8 +21,8 @@ namespace WebAPI.Controllers
                     Name="Nebahat",
                     Surname="Akkiraz",
                     Branch="Fen Bilgisi",
-                    Schools = new List<School>(){
-                        new School(){
+                    Schools = new List<Schol>(){
+                        new Schol(){
                             Code="01254",
                             Name="Adana Abdülkadir Paksoy Kyz Lisesi",
                             Default=false,
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
                                 }
                             }
                         },
-                        new School(){
+                        new Schol(){
                             Code="01253",
                             Name="Ceyhan Lisesi",
                             Default=false,
@@ -87,10 +87,10 @@ namespace WebAPI.Controllers
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Branch { get; set; }
-        public List<School> Schools { get; set; }
+        public List<Schol> Schools { get; set; }
     }
 
-    public class School
+    public class Schol
     {
         public string Code { get; set; }
         public string Name { get; set; }
