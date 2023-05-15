@@ -38,11 +38,9 @@ namespace WebAPI
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<ITeacherDal, EfTeacherDal>();
             services.AddTransient<ITeacherService, TeacherService>();
-            services.AddCors(opt => opt.AddPolicy(name: MyAllowSpecificOrigins,
-                policy =>
-                      {
-                          policy.WithOrigins("https://yoklamaapi.solokod.com", "https://localhost:44362/");
-                      }));
+            services.AddCors(options =>
+     options.AddDefaultPolicy(builder =>
+     builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
@@ -72,11 +70,8 @@ namespace WebAPI
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Versions}/{action=Get}/{id?}");
-                //endpoints.MapControllers();
-                endpoints.MapControllers()
-             .RequireCors(MyAllowSpecificOrigins);
+                endpoints.MapControllers();
             });
-            //app.Run();
         }
     }
 }
