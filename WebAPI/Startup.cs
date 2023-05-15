@@ -23,7 +23,7 @@ namespace WebAPI
         }
 
         public IConfiguration Configuration { get; }
-        private string  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,11 +38,11 @@ namespace WebAPI
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<ITeacherDal, EfTeacherDal>();
             services.AddTransient<ITeacherService, TeacherService>();
-            services.AddCors(opt=>opt.AddPolicy(name: MyAllowSpecificOrigins),
-                policy  =>
+            services.AddCors(opt => opt.AddPolicy(name: MyAllowSpecificOrigins,
+                policy =>
                       {
                           policy.WithOrigins("https://yoklamaapi.solokod.com");
-                      }); );
+                      }));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
@@ -63,7 +63,7 @@ namespace WebAPI
             //app.UseHttpsRedirection();
 
 
-            app.UseRouting(); 
+            app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
 
