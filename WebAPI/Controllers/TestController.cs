@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [EnableCors("MyPolicy")]
+        [EnableCors("MyAllowSpecificOrigins")]
         [HttpGet]
         [Route("")]
         public ActionResult Get()
