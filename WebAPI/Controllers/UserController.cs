@@ -24,11 +24,11 @@ namespace WebAPI.Controllers
             try
             {
                 var result = await _service.GetListAsync();
-                return Result.ApiResult(result);
+                return result != null ? Ok(result) : NotFound();
             }
             catch (Exception ex)
             {
-                return Result.ApiResult(null, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Get(int id)
         {
             var result = await _service.GetByIdAsync(id);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpDelete]
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id);
-            return Result.ApiResult(result);
+            return result != false ? Ok(result) : NotFound();
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Add([FromBody] User user)
         {
             var result = await _service.AddAsync(user);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> AddRange([FromBody] List<User> users)
         {
             var result = await _service.AddRangeAsync(users);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPut]
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Update([FromBody] User user)
         {
             var result = await _service.UpdateAsync(user);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }

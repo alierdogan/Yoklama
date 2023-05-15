@@ -1,7 +1,4 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
-
-namespace WebAPI
+﻿namespace WebAPI
 {
     public class Result
     {
@@ -9,7 +6,7 @@ namespace WebAPI
         private readonly string _message;
         private readonly object _data;
 
-        private Result(object data, string message)
+        public Result(object data, string message)
         {
             if (data == null)
             {
@@ -18,16 +15,11 @@ namespace WebAPI
             }
             else
             {
-                _success = false;
+                _success = true;
                 _message = "";
             }
 
             _data = data;
-        }
-
-        public static OkObjectResult ApiResult(object data, string message = "")
-        {
-            return new OkObjectResult(new Result(data, message));
         }
 
         public bool Success => _success;

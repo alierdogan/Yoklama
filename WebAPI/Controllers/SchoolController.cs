@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Get()
         {
             var result = await _service.GetListAsync();
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Get(int id)
         {
             var result = await _service.GetByIdAsync(id);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpDelete]
@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id);
-            return Result.ApiResult(result);
+            return result != false ? Ok(result) : NotFound();
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Add([FromBody] School School)
         {
             var result = await _service.AddAsync(School);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> AddRange([FromBody] List<School> Schools)
         {
             var result = await _service.AddRangeAsync(Schools);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPut]
@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Update([FromBody] School School)
         {
             var result = await _service.UpdateAsync(School);
-            return Result.ApiResult(result);
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }

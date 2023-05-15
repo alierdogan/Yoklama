@@ -1,0 +1,40 @@
+﻿@using Entities.Concrete
+
+@model List<Person>
+
+<h1>Kişi Listesi</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>TC NO</td>
+            <td>ADI</td>
+            <td>SOYADI</td>
+            <td>CİNSİYET</td>
+            <td>CEP TELEFONU</td>
+            <td>MAIL</td>
+            <td>ADRES</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Person result in Model)
+        {
+            <tr>
+                <td hidden="hidden">@result.ID</td>
+                <td>@result.MERNISNO</td>
+                <td>@result.NAME</td>
+                <td>@result.SURNAME</td>
+                <td>@result.GENDER</td>
+                <td>@result.MOBILEPHONE</td>
+                <td>@result.EMAIL</td>
+                <td>@result.ADDRESS</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@result.ID">Güncelle</a>
+                    <a asp-action="Delete" asp-route-id="@result.ID">Sil</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

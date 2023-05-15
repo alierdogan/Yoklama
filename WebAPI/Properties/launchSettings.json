@@ -12,8 +12,8 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      //"launchUrl": "api/Versions/Get",
-      "launchUrl": "swagger",
+      "launchUrl": "api/Version",
+      //"launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -21,7 +21,7 @@
     "WebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "http://localhost:5000/api/Version",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

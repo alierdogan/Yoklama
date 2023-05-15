@@ -72,11 +72,11 @@ namespace WebAPI.Controllers
 
             try
             {
-                return Result.ApiResult(Teachers);
+                return Teachers != null ? Ok(Teachers) : NotFound();
             }
             catch (Exception ex)
             {
-                return Result.ApiResult(null, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }
