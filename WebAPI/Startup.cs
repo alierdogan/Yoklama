@@ -38,9 +38,12 @@ namespace WebAPI
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<ITeacherDal, EfTeacherDal>();
             services.AddTransient<ITeacherService, TeacherService>();
-            services.AddCors(options =>
-     options.AddDefaultPolicy(builder =>
-     builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
@@ -63,7 +66,7 @@ namespace WebAPI
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("MyPolicy");
             app.UseAuthentication();
 
             //app.UseAuthorization();
