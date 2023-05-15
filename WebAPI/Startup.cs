@@ -41,7 +41,7 @@ namespace WebAPI
             services.AddCors(opt => opt.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                       {
-                          policy.WithOrigins("https://yoklamaapi.solokod.com");
+                          policy.WithOrigins("https://yoklamaapi.solokod.com", "https://localhost:44362/");
                       }));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
@@ -65,15 +65,18 @@ namespace WebAPI
 
             app.UseRouting();
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Versions}/{action=Get}/{id?}");
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllers()
+             .RequireCors(MyAllowSpecificOrigins);
             });
+            //app.Run();
         }
     }
 }

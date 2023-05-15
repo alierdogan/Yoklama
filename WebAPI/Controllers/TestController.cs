@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +12,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        [EnableCors("MyPolicy")]
         [HttpGet]
         [Route("")]
         public ActionResult Get()
