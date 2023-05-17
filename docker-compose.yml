@@ -3,7 +3,7 @@ services:
   api:
     build: .
     ports:
-      - 80:80
+      - 80:443
     depends_on:
       - db
 
