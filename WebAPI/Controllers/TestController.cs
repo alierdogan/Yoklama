@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Cors;
+using System.Net.Http.Headers;
 
 namespace WebAPI.Controllers
 {
@@ -12,7 +13,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [EnableCors("MyAllowSpecificOrigins")]
+        [EnableCors()]
         [HttpGet]
         [Route("")]
         public ActionResult Get()
@@ -74,6 +75,7 @@ namespace WebAPI.Controllers
 
             try
             {
+                
                 return Ok(Teachers);
             }
             catch (Exception ex)
