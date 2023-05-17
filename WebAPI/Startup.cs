@@ -70,7 +70,8 @@ namespace WebAPI
 
             app.UseRouting();
 
-            app.UseCors(opt=>opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(opt=>opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            app.UseOptions();
             //app.UseAuthentication();
 
             app.UseAuthorization();
