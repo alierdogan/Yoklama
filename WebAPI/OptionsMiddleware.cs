@@ -23,8 +23,8 @@ namespace WebAPI
             if (context.Request.Method == "OPTIONS")
             {
                 context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                context.Response.Headers.Add("Access-Control-Allow-Headers", new[] { "Origin, X-Requested-With, Content-Type, Accept" });
-                context.Response.Headers.Add("Access-Control-Allow-Methods", new[] { "GET, POST, PUT, DELETE, OPTIONS" });
+                context.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+                context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
                 context.Response.Headers.Add("Access-Control-Allow-Credentials", new[] { "true" });
                 context.Response.StatusCode = 200;
                 return context.Response.WriteAsync("OK");
