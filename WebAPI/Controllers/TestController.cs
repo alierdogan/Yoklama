@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [EnableCors()]
+        //[EnableCors()]
         [HttpGet]
         [Route("")]
         public ActionResult Get()

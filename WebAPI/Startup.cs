@@ -32,8 +32,8 @@ namespace WebAPI
             //services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(@"Data Source=127.0.0.1,1401; User ID=sa; Password=Aa123456; Initial Catalog=Yoklama; Trusted_Connection=True; TrustServerCertificate=True; Persist Security Info=True; Integrated Security=false;", opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
             services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("YoklamaDb"), opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
 
-            services.AddCors();
-            services.AddMvc();
+            //services.AddCors();
+            //services.AddMvc();
 
             services.AddControllers();
             services.AddTransient<IUserDal, EfUserDal>();
@@ -71,7 +71,7 @@ namespace WebAPI
             app.UseRouting();
 
             //app.UseCors(opt=>opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            app.UseCors();
+            //app.UseCors();
             app.UseOptions();
             //app.UseAuthentication();
 
