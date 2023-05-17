@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
 
             try
             {
-                return Result.ApiResult(Teachers);
+                return Ok(Teachers);
             }
             catch (Exception ex)
             {
