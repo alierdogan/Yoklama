@@ -27,8 +27,8 @@ namespace WebAPI
             }
             catch (Exception ex)
             {
-                var logger = services.GetRequiredService<ILogger>();
-                logger.LogError(ex, "Veritabaný oluþturulamadý");
+                //var logger = services.GetRequiredService<ILogger>();
+                //logger.LogError(ex, "Veritabaný oluþturulamadý");
             }
         }
 
