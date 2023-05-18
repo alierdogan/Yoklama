@@ -79,8 +79,8 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Versions}/{action=Get}/{id?}");
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Test}/{action=Get}/{id?}");
+                //endpoints.MapControllers();
             });
         }
     }
