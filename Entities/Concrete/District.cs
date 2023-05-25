@@ -7,6 +7,11 @@ namespace Entities.Concrete
     {
         public int CODE { get; set; }
         public string NAME { get; set; }
-        public int PROVINCEREF { get; set; }
+        public string LATITUDE { get; set; }
+        public string LONGITUDE { get; set; }
+
+        public virtual Province Province { get; set; }
+        public virtual ICollection<Neighbourhood> Neighbourhoods { get; set; }
+
     }
 }

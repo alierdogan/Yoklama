@@ -5,6 +5,10 @@ namespace Entities.Concrete
 {
     public class Student : AuditableEntity
     {
-        public int PersonId { get; set; }
+        public string SCHOOLNUMBER { get; set; }
+
+        public virtual Person Person { get; set; }
+        public virtual School School { get; set; }
+        public virtual Classroom Classroom { get; set; }
     }
 }

@@ -5,6 +5,10 @@ namespace Entities.Concrete
 {
     public class Teacher : AuditableEntity
     {
-        public int PersonId { get; set; }
+        public int ACCESSCODE { get; set; }
+
+        public virtual ICollection<SchoolTeacher> Schools { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Branch Branch { get; set; }
     }
 }

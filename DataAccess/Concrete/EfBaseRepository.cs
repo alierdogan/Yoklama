@@ -50,10 +50,34 @@ namespace DataAccess.Concrete
             return await context.Set<TEntity>().FindAsync(id);
         }
 
+        public async Task<TEntity> GetByIdWithIncludeAsync(int id, params Expression<Func<TEntity, object>>[] includes)
+        {
+            using TContext context = new();
+            var query = context.Set<TEntity>().ToList();
+            foreach (var include in includes)
+            {
+                query = context.Set<TEntity>().Include(include).ToList();
+            }
+            return query.Where(f=>f.ID == id).FirstOrDefault();
+        }
+
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             using TContext context = new();
             return filter == null ? await context.Set<TEntity>().ToListAsync() : await context.Set<TEntity>().Where(filter).ToListAsync();
+        }
+
+        public async Task<List<TEntity>> GetListWithIncludeAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
+        {
+            using TContext context = new();
+            var query = context.Set<TEntity>().ToList();
+            foreach (var include in includes)
+            {
+                query = context.Set<TEntity>().Include(include).ToList();
+            }
+            return filter!=null 
+                ? query.AsQueryable().Where(filter).ToList()
+                : query.AsQueryable().ToList();
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)

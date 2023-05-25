@@ -7,5 +7,6 @@ namespace Entities.Concrete
     {
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
+        public virtual School School { get; set; }
     }
 }

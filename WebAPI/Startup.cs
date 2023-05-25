@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace WebAPI
 {
@@ -30,18 +31,25 @@ namespace WebAPI
         {
             services.AddSingleton(_ => Configuration);
             //services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(@"Data Source=127.0.0.1,1401; User ID=sa; Password=Aa123456; Initial Catalog=Yoklama; Trusted_Connection=True; TrustServerCertificate=True; Persist Security Info=True; Integrated Security=false;", opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
-            services.AddDbContext<WebAPIContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("YoklamaDb"), opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
+            services.AddDbContext<YoklamaContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("YoklamaDb"), opts => opts.MigrationsAssembly("DataAccess").MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
 
             services.AddCors();
-            //services.AddMvc();
+            //services.AddMvc().AddJsonOptions(opt=>opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddControllers();
-            services.AddTransient<IUserDal, EfUserDal>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IPersonDal, EfPersonDal>();
-            services.AddTransient<IPersonService, PersonService>();
-            services.AddTransient<ITeacherDal, EfTeacherDal>();
-            services.AddTransient<ITeacherService, TeacherService>();
+            services.AddControllers().AddJsonOptions(opt=>opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+            services.AddTransient<IService<User>, Service<User>>();
+            services.AddTransient<IService<Person>, Service<Person>>();
+            services.AddTransient<IService<Teacher>, Service<Teacher>>();
+            //services.AddTransient<IService<Student>, Service<Student>>();
+            services.AddTransient<IService<School>, Service<School>>();
+
+            services.AddTransient<IBaseDal<User>, EfBaseDal<User, YoklamaContext>>();
+            services.AddTransient<IBaseDal<Person>, EfBaseDal<Person, YoklamaContext>>();
+            services.AddTransient<IBaseDal<Teacher>, EfBaseDal<Teacher, YoklamaContext>>();
+            //services.AddTransient<IBaseDal<Student>, EfBaseDal<Student, WebAPIContext>>();
+            services.AddTransient<IBaseDal<School>, EfBaseDal<School, YoklamaContext>>();
+
             //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             //{
             //    builder.AllowAnyOrigin()
@@ -51,7 +59,7 @@ namespace WebAPI
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "YoklamaAPI", Version = "v1" });
             });
         }
 
@@ -79,8 +87,8 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Test}/{action=Get}/{id?}");
-                //endpoints.MapControllers();
+                //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Version}/{action=Get}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

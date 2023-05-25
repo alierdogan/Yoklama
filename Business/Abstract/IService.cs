@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IService<TEnTity>
+    public interface IService<TEntity> where TEntity : class, IEntity, new()
     {
-        Task<TEnTity> GetByIdAsync(int id);
-        Task<IEnumerable<TEnTity>> GetListAsync(Expression<Func<TEnTity, bool>> filter = null);
-        Task<TEnTity> GetAsync(Expression<Func<TEnTity, bool>> filter);
-        Task<TEnTity> AddAsync(TEnTity entity);
-        Task<IEnumerable<TEnTity>> AddRangeAsync(IEnumerable<TEnTity> entities);
-        Task<TEnTity> UpdateAsync(TEnTity entity);
+        Task<TEntity> GetByIdAsync(int id);
+        Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> filter = null);
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(int id);
+        Task<List<TEntity>> GetListWithIncludeAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetByIdWithIncludeAsync(int id, params Expression<Func<TEntity, object>>[] includes);
     }
 }

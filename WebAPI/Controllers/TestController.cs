@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        [EnableCors()]
+        //[EnableCors()]
         [HttpGet]
         [Route("")]
         public ActionResult Get()
@@ -24,8 +24,8 @@ namespace WebAPI.Controllers
                     Name="Nebahat",
                     Surname="Akkiraz",
                     Branch="Fen Bilgisi",
-                    Schools = new List<School>(){
-                        new School(){
+                    Schools = new List<Okul>(){
+                        new Okul(){
                             Code="01254",
                             Name="Adana Abdülkadir Paksoy Kyz Lisesi",
                             Default=false,
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
                                 }
                             }
                         },
-                        new School(){
+                        new Okul(){
                             Code="01253",
                             Name="Ceyhan Lisesi",
                             Default=false,
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Result.ApiResult(null, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }
@@ -91,10 +91,10 @@ namespace WebAPI.Controllers
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Branch { get; set; }
-        public List<School> Schools { get; set; }
+        public List<Okul> Schools { get; set; }
     }
 
-    public class School
+    public class Okul
     {
         public string Code { get; set; }
         public string Name { get; set; }

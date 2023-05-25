@@ -22,7 +22,7 @@ namespace WebAPI
             var services = scope.ServiceProvider;
             try
             {
-                var context = services.GetRequiredService<WebAPIContext>();
+                var context = services.GetRequiredService<YoklamaContext>();
                 DbInitializer.Initilize(context);
             }
             catch (Exception ex)

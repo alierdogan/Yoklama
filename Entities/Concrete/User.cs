@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete.Base;
+using Entities.Enums;
 using System.Runtime;
 
 namespace Entities.Concrete
@@ -7,6 +8,8 @@ namespace Entities.Concrete
     {
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
-        public int PersonId { get; set; }
+        public UserType? UserType { get; set; }
+
+        public virtual Person Person { get; set; }
     }
 }

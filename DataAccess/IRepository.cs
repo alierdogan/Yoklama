@@ -17,5 +17,7 @@ namespace DataAccess
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(int id);
+        Task<List<TEntity>> GetListWithIncludeAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetByIdWithIncludeAsync(int id, params Expression<Func<TEntity, object>>[] includes);
     }
 }
