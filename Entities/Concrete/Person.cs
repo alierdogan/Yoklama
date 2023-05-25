@@ -8,7 +8,7 @@ namespace Entities.Concrete
     public class Person : AuditableEntity
     {
         [Required]
-        public decimal MERNISNO { get; set; }
+        public long MERNISNO { get; set; }
         [Required]
         [MaxLength(100)]
         public string NAME { get; set; }
