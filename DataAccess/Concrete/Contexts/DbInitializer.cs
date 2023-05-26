@@ -218,18 +218,18 @@ namespace DataAccess.Concrete.Contexts
             context.Teachers.AddRange(teachers);
 
             var schoolTeacher = new SchoolTeacher[] {
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[0] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[0] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[1] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[1] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[2] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[3] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[4] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[5] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[6] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[7] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[8] },
-                new SchoolTeacher(){ School=schools[1],Teacher=teachers[9] }
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[0],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[0],ISDEFAULT=false},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[1],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[1],ISDEFAULT=false},
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[2],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[3],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[4],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[5],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[6],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[7],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[8],ISDEFAULT=true},
+                new SchoolTeacher(){ School=schools[1],Teacher=teachers[9],ISDEFAULT=true}
             };
 
             context.SchoolTeachers.AddRange(schoolTeacher);
