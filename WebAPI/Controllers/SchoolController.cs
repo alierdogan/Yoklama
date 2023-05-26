@@ -43,10 +43,20 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("AccessCode/{accessCode:int}")]
-        public async Task<ActionResult> GetByAccessCode(int accessCode)
+        [Route("{accessCode:int?}")]
+        public async Task<ActionResult> GetByAccessCode(int? accessCode = null)
         {
-            var result = await _service.GetListWithIncludeAsync(null, f => f.Teachers.Where(f => f.Teacher.ACCESSCODE == accessCode));
+            List<School> result = null;
+
+            if (accessCode.HasValue)
+            {
+                result = await _service.GetListWithIncludeAsync(null, f => f.Teachers.Where(f => f.Teacher.ACCESSCODE == accessCode));
+            }
+            else
+            {
+                result = await _service.GetListWithIncludeAsync(null, f => f.Teachers);
+            }
+
             if (result == null || result.Count() == 0)
             {
                 return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
@@ -69,26 +79,26 @@ namespace WebAPI.Controllers
 
 
 
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<ActionResult> Get(int id)
-        {
-            var result = await _service.GetByIdWithIncludeAsync(id);
-            if (result == null)
-            {
-                return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
-            }
-            var lastResult = new SchoolDto()
-            {
-                Active = result.ACTIVE,
-                Code = result.ID,
-                Name = result.NAME
-            };
-            if (lastResult == null)
-            {
-                return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
-            }
-            return new SuccessDataResponse<SchoolDto>(lastResult).ResponseOk();
-        }
+        //[HttpGet]
+        //[Route("{id:int}")]
+        //public async Task<ActionResult> Get(int id)
+        //{
+        //    var result = await _service.GetByIdWithIncludeAsync(id);
+        //    if (result == null)
+        //    {
+        //        return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
+        //    }
+        //    var lastResult = new SchoolDto()
+        //    {
+        //        Active = result.ACTIVE,
+        //        Code = result.ID,
+        //        Name = result.NAME
+        //    };
+        //    if (lastResult == null)
+        //    {
+        //        return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
+        //    }
+        //    return new SuccessDataResponse<SchoolDto>(lastResult).ResponseOk();
+        //}
     }
 }

@@ -44,10 +44,19 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("AccessCode/{accessCode:int}")]
-        public async Task<ActionResult> GetByAccessCode(int accessCode)
+        [Route("{accessCode:int?}")]
+        public async Task<ActionResult> GetByAccessCode(int? accessCode = null)
         {
-            var result = await _service.GetListWithIncludeAsync(f => f.ACCESSCODE == accessCode, f => f.Branch, f => f.Person);
+            List<Teacher> result;
+            if (accessCode.HasValue)
+            {
+                result = await _service.GetListWithIncludeAsync(f => f.ACCESSCODE == accessCode, f => f.Branch, f => f.Person);
+            }
+            else
+            {
+                result = await _service.GetListWithIncludeAsync(null, f => f.Branch, f => f.Person);
+            }
+
             if (result == null || result.Count() == 0)
             {
                 return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
@@ -60,34 +69,40 @@ namespace WebAPI.Controllers
                     Branch = item.Branch.NAME,
                     Name = item.Person.NAME,
                     Surname = item.Person.SURNAME
-                }).FirstOrDefault();
-
-                return new SuccessDataResponse<TeacherDto>(lastResult).ResponseOk();
+                });
+                if (lastResult.Count() == 1)
+                {
+                    return new SuccessDataResponse<TeacherDto>(lastResult.FirstOrDefault()).ResponseOk();
+                }
+                else
+                {
+                    return new SuccessDataResponse<IEnumerable<TeacherDto>>(lastResult).ResponseOk();
+                }
             }
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<ActionResult> Get(int id)
-        {
-            var result = await _service.GetByIdWithIncludeAsync(id, f => f.Branch, f => f.Person);
-            if (result == null)
-            {
-                return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
-            }
-            var lastResult = new TeacherDto()
-            {
-                AccessCode = result.ACCESSCODE,
-                Branch = result.Branch.NAME,
-                Name = result.Person.NAME,
-                Surname = result.Person.SURNAME
-            };
-            if (lastResult == null)
-            {
-                return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
-            }
-            return new SuccessDataResponse<TeacherDto>(lastResult).ResponseOk();
-        }
+        //[HttpGet]
+        //[Route("{id:int}")]
+        //public async Task<ActionResult> Get(int id)
+        //{
+        //    var result = await _service.GetByIdWithIncludeAsync(id, f => f.Branch, f => f.Person);
+        //    if (result == null)
+        //    {
+        //        return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
+        //    }
+        //    var lastResult = new TeacherDto()
+        //    {
+        //        AccessCode = result.ACCESSCODE,
+        //        Branch = result.Branch.NAME,
+        //        Name = result.Person.NAME,
+        //        Surname = result.Person.SURNAME
+        //    };
+        //    if (lastResult == null)
+        //    {
+        //        return new ErrorResponse("Kayıt bulunamadı").ResponseNotFound();
+        //    }
+        //    return new SuccessDataResponse<TeacherDto>(lastResult).ResponseOk();
+        //}
 
         //[HttpDelete]
         //[Route("Delete/{id:int}")]
