@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
             }
             else if (result.Any(f => f.Teachers.Count > 0))
             {
-                var lastResult = result.Where(f => f.Teachers.Count > 0).Select(item => new SchoolDto()
+                var lastResult = result.OrderBy(f => f.ID).Where(f => f.Teachers.Count > 0).Select(item => new SchoolDto()
                 {
                     Order = result.ToList().IndexOf(item),
                     Code = item.ID,
