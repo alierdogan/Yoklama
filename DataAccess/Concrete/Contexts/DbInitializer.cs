@@ -220,8 +220,8 @@ namespace DataAccess.Concrete.Contexts
             var schoolTeacher = new SchoolTeacher[] {
                 new SchoolTeacher(){ School=schools[0],Teacher=teachers[0] },
                 new SchoolTeacher(){ School=schools[1],Teacher=teachers[0] },
-                new SchoolTeacher(){ School=schools[0],Teacher=teachers[1] },
                 new SchoolTeacher(){ School=schools[1],Teacher=teachers[1] },
+                new SchoolTeacher(){ School=schools[0],Teacher=teachers[1] },
                 new SchoolTeacher(){ School=schools[0],Teacher=teachers[2] },
                 new SchoolTeacher(){ School=schools[0],Teacher=teachers[3] },
                 new SchoolTeacher(){ School=schools[0],Teacher=teachers[4] },
