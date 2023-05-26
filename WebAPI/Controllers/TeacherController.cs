@@ -60,9 +60,9 @@ namespace WebAPI.Controllers
                     Branch = item.Branch.NAME,
                     Name = item.Person.NAME,
                     Surname = item.Person.SURNAME
-                });
+                }).FirstOrDefault();
 
-                return new SuccessDataResponse<IEnumerable<TeacherDto>>(lastResult).ResponseOk();
+                return new SuccessDataResponse<TeacherDto>(lastResult).ResponseOk();
             }
         }
 
