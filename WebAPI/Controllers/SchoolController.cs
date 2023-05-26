@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
 
             var lastResult = result.Select(item => new SchoolDto()
             {
-                Active = item.ACTIVE,
+                Order = result.ToList().IndexOf(item),
                 Code = item.ID,
                 Name = item.NAME
             });
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
             {
                 var lastResult = result.Where(f => f.Teachers.Count > 0).Select(item => new SchoolDto()
                 {
-                    Active = item.ACTIVE,
+                    Order = result.ToList().IndexOf(item),
                     Code = item.ID,
                     Name = item.NAME
                 });
