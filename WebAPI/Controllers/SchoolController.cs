@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
 
             var lastResult = result.Select(item => new SchoolDto()
             {
-                Order = result.ToList().IndexOf(item),
+                IsDefault = false,
                 Code = item.ID,
                 Name = item.NAME
             });
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
             {
                 var lastResult = result.OrderBy(f => f.ID).Where(f => f.Teachers.Count > 0).Select(item => new SchoolDto()
                 {
-                    Order = result.ToList().IndexOf(item),
+                    IsDefault = item.Teachers.Where(f=>f.School.ID == item.ID).FirstOrDefault().ISDEFAULT,
                     Code = item.ID,
                     Name = item.NAME
                 });

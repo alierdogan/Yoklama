@@ -11,5 +11,6 @@ namespace Entities.Concrete
     {
         public School School { get; set; }
         public Teacher Teacher { get; set; }
+        public bool ISDEFAULT { get; set; }
     }
 }
